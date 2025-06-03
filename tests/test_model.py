@@ -1,4 +1,4 @@
-from src.predict import predict
+from src.model import train_model
 
 def test_model_training():
     acc = train_model()
