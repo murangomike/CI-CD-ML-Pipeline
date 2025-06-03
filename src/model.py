@@ -1,9 +1,9 @@
+import os
+import joblib
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-import joblib
-import os
 
 def load_data():
     iris = load_iris()
@@ -13,12 +13,15 @@ def load_data():
 
 def train_model():
     X_train, X_test, y_train, y_test = load_data()
-    model = LogisticRegression(max_iter=200)
+    model = LogisticRegression()
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
-
+    
+    # Create models directory if it doesn't exist
     os.makedirs("models", exist_ok=True)
+    
+    # Save the trained model
     joblib.dump(model, "models/model.joblib")
-
+    
     return acc
